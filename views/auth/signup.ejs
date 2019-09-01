@@ -1,0 +1,56 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+            <% if(message) { %>
+                <div class="error-message"> 
+                    <p><%= message %></p>
+                </div>
+            <% } %>
+        <form class="product-form" action="/signup" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <div class="form-control">
+                <label for="name">Name</label>
+                <input 
+                    class="<%=validationErrors.find(e=>e.param==='name')?'error':'' %>"
+                    type="text" 
+                    name="name" 
+                    id="name" 
+                    value="<%= oldfield.name%>">
+            </div>
+            <div class="form-control">
+                <label for="email">E-mail</label>
+                <input 
+                      class="<%=validationErrors.find(e=>e.param==='email')?'error':'' %>"
+                      type="text" 
+                      name="email" 
+                      id="email" 
+                      value="<%= oldfield.email%>">
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input 
+                       class="<%=validationErrors.find(e=>e.param==='password')?'error':'' %>" 
+                       type="password" 
+                       name="password" 
+                       id="password" 
+                       value="<%= oldfield.password%>">
+            </div>
+            <div class="form-control">
+                <label for="confirmPassword">confirm Password</label>
+                <input 
+                      class="<%=validationErrors.find(e=>e.param==='confirmPassword')?'error':'' %>"
+                      type="password" 
+                      name="confirmPassword" 
+                      id="confirmPassword" 
+                      value="<%= oldfield.confirmPassword%>">
+            </div>
+            <button class="btn" type="submit">Signup</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>
